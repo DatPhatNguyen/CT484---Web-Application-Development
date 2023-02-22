@@ -41,12 +41,14 @@ class ContactService {
   //todo: find by name
   async findByName(name) {
     return await this.find({
-      name: { $regex: new RegExp(name), options: "i" },
+      name: { $regex: new RegExp(name), $options: "i" },
     });
   }
   //todo: find by id
   async findById(id) {
-    return await this.Contact.findOne({ _id: ObjectId.isValid(id) ? new ObjectId(id) : null });
+    return await this.Contact.findOne({
+      _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
+    });
   }
   async update(id, payload) {
     const filter = {
